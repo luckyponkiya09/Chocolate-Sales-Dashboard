@@ -1,7 +1,7 @@
 # 🍫 Chocolate Sales Dashboard
 
 <p align="center">
-  <img src="Images/Home_Page.png" width="100%">
+  <img src="Images/Chocolate_Sales.png" width="100%">
 </p>
 
 An end-to-end **Business Intelligence and Data Analytics** project that transforms raw chocolate sales data into meaningful business insights using **Excel, Power BI, Power Query, and DAX**.
