@@ -10,14 +10,10 @@ from app.state import BusinessState
 
 load_dotenv()
 
-# Project data directory
-import os
+from pathlib import Path
 
-BASE_DIR = os.path.dirname(
-    os.path.dirname(os.path.abspath(__file__))
-)
-
-DATA_DIR = os.path.join(BASE_DIR, "Dataset")
+BASE_DIR = Path(__file__).resolve().parents[2]
+DATA_DIR = BASE_DIR / "Dataset"
 
 # --------------------------------------------------
 # Helper: Load Excel datasets

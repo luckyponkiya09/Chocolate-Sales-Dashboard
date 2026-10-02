@@ -1,9 +1,19 @@
 import pandas as pd
 from pathlib import Path
 
-DATA_DIR = Path("D:\\projects\\Chocolate-Sales-Dashboard\\Dataset")
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parents[2]
+DATA_DIR = BASE_DIR / "Dataset"
 
 def load_datasets():
+    print("Dataset directory:", DATA_DIR)
+    print("Dataset directory exists:", DATA_DIR.exists())
+
+    if not DATA_DIR.exists():
+        raise FileNotFoundError(
+            f"Dataset folder not found: {DATA_DIR}"
+        )
     return {
         "sales": pd.read_excel(
             DATA_DIR / "Chocolate main Data.xlsx"
