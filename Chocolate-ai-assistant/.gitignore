@@ -1,0 +1,14 @@
+# Python environment
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# Secrets
+.env
+.streamlit/secrets.toml
+
+# Editor and operating system files
+.vscode/
+.DS_Store
+Thumbs.db
