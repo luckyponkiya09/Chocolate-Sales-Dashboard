@@ -1,0 +1,182 @@
+table Region
+	lineageTag: 409d96bc-d9bd-47b0-b070-81d74602e14e
+
+	measure 'Total Regions' =
+			
+			DISTINCTCOUNT(Region[Region ])
+		formatString: 0
+		lineageTag: fec0cc97-028d-4a61-8740-2a38da1d9961
+
+	measure 'Total Countries' =
+			
+			DISTINCTCOUNT(Region[  Country  ])
+		formatString: 0
+		lineageTag: 079394cf-db45-47de-8a5d-9d49662c77d5
+
+	measure 'Urban Orders' =
+			
+			CALCULATE(
+			    [Total Orders],
+			    Region[Zone Type]="Urban"
+			)
+		formatString: 0
+		lineageTag: 6bf22e25-f869-4b82-b43d-aa83f893ba7c
+
+	measure 'Semi-Urban Orders' =
+			
+			CALCULATE(
+			    [Total Orders],
+			    Region[Zone Type]="Semi-Urban"
+			)
+		formatString: 0
+		lineageTag: 8cebfda4-7565-4478-9304-7afdc18ca5ef
+
+	measure 'Metro Orders' =
+			
+			CALCULATE(
+			    [Total Orders],
+			    Region[Zone Type]="Metro"
+			)
+		formatString: 0
+		lineageTag: 195a5a79-f8dc-4db8-9e74-83e429c960ef
+
+	measure 'Urban Revenue' =
+			
+			CALCULATE(
+			    [Total Revenue],
+			    Region[Zone Type]="Urban"
+			)
+		formatString: 0
+		lineageTag: 3223bae2-0298-4d2e-9586-975673b0fc55
+
+	measure 'Semi-Urban Revenue' =
+			
+			CALCULATE(
+			    [Total Revenue],
+			    Region[Zone Type]="Semi-Urban"
+			)
+		formatString: 0
+		lineageTag: ba428897-9c15-4ad6-b469-ed7b26cf2030
+
+	measure 'Metro Revenue' =
+			
+			CALCULATE(
+			    [Total Revenue],
+			    Region[Zone Type]="Metro"
+			)
+		formatString: 0
+		lineageTag: 8537633c-0a63-4b12-ae62-c6e3bd5bf89c
+
+	measure 'High Population Orders' =
+			
+			CALCULATE(
+			    [Total Orders],
+			    Region[Population Category]="High"
+			)
+		formatString: 0
+		lineageTag: 4f296b66-6701-448e-a587-aa7899a9c1f4
+
+	measure 'Medium Population Orders' =
+			
+			CALCULATE(
+			    [Total Orders],
+			    Region[Population Category]="Medium"
+			)
+		formatString: 0
+		lineageTag: d66e32c1-d6e8-4a91-bb7a-02d8a826fda4
+
+	measure 'High Population Revenue' =
+			
+			CALCULATE(
+			    [Total Revenue],
+			    Region[Population Category]="High"
+			)
+		formatString: 0
+		lineageTag: 2993a12c-d8eb-4e81-b663-e039ce4e5b7b
+
+	measure 'Medium Population Revenue' =
+			
+			CALCULATE(
+			    [Total Revenue],
+			    Region[Population Category]="Medium"
+			)
+		formatString: 0
+		lineageTag: b341e351-b13d-46b1-9f79-79b47af82dc9
+
+	measure 'Regional Manager Count' =
+			
+			DISTINCTCOUNT(Region[Regional Manager])
+		formatString: 0
+		lineageTag: 0ca25e9b-b563-4904-935c-46f39c886196
+
+	column '  Order_ID  '
+		dataType: int64
+		formatString: 0
+		lineageTag: 96446fb0-f235-4133-ac6f-c838d1829f4b
+		summarizeBy: none
+		sourceColumn: "  Order_ID  "
+
+		annotation SummarizationSetBy = Automatic
+
+	column '  Country  '
+		dataType: string
+		lineageTag: 074d6555-f761-4b40-b7b4-a35d1626888e
+		summarizeBy: none
+		sourceColumn: "  Country  "
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Region '
+		dataType: string
+		lineageTag: 3696b713-8f49-4984-ad17-d36a4d472ddb
+		summarizeBy: none
+		sourceColumn: "Region "
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Region Code'
+		dataType: string
+		lineageTag: 8c1b4b65-4c42-49aa-9788-bda60472493b
+		summarizeBy: none
+		sourceColumn: Region Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Zone Type'
+		dataType: string
+		lineageTag: b857f393-bc1a-4151-9d91-8188f4d4a751
+		summarizeBy: none
+		sourceColumn: Zone Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Population Category'
+		dataType: string
+		lineageTag: 9019f2dd-224a-49de-bacc-62af0517f59d
+		summarizeBy: none
+		sourceColumn: Population Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Regional Manager'
+		dataType: string
+		lineageTag: cfe7e435-36be-41d9-8d57-4589d36b67fe
+		summarizeBy: none
+		sourceColumn: Regional Manager
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Region = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\ponki.LUCKY\OneDrive\Desktop\Internship\Chocolate Full Data\Chocolate Full Data\Region.xlsx"), null, true),
+				    Region_Table = Source{[Item="Region",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(Region_Table,{{"  Order_ID  ", Int64.Type}, {"  Country  ", type text}, {"Region ", type text}, {"Region Code", type text}, {"Zone Type", type text}, {"Population Category", type text}, {"Regional Manager", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

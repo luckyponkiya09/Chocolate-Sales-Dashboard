@@ -1,0 +1,230 @@
+table Country
+	lineageTag: 434877d3-5442-439a-b4c8-be40ded7cf6d
+
+	measure 'Boxes Shipped Per Order' = [Total Boxes Shipped]/[Total Orders]
+		lineageTag: 9dbe71a9-8b3a-456b-99c3-bafba5dbfb47
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Avg Qnty Per Order' = [Total Qnty]/[Total Orders]
+		lineageTag: 336c495e-d3c1-42ce-80c5-c2605a0c96da
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'India Sales' = CALCULATE([Total Revenue],FILTER(Country,Country[Country]="INDIA"))
+		formatString: "₹"\ #,0.###############;#,0.###############\ -"₹";"₹"\ #,0.###############
+		lineageTag: f78bbad9-c957-4dae-b07a-17abe61e99b7
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-IN"}
+
+	measure 'Country Sales %' = DIVIDE([Total Revenue],CALCULATE([Total Revenue],ALL(Country[Country])))
+		lineageTag: 5ce3bb78-6073-41c8-9b42-2c5b2bcfa4d1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Country Revenue Rank' = RANKX(ALL(Country[Country]),[Total Revenue])
+		formatString: 0
+		lineageTag: a1bb62ed-29f2-41d7-b023-1153de122e35
+
+	measure 'Country Rank By Orders' = RANKX(ALL(Country[Country]),[Total Orders])
+		formatString: 0
+		lineageTag: 26ac8d70-a227-46bb-9de1-1f431e2c4b66
+
+	measure 'Country Rank Based On Boxes Shipped' = RANKX(ALL(Country[Country]),[Total Boxes Shipped])
+		formatString: 0
+		lineageTag: bddf6c73-a128-4366-98d9-b6404dd4b96b
+
+	measure 'Avg Revenue Per Country' = AVERAGEX(VALUES(Country[Country]),[Total Revenue])
+		lineageTag: 2f68a58a-3325-4cf0-a9d8-478629fe5936
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Avg Qnty Per Country' = AVERAGEX(VALUES(Country[Country]),[Total Qnty])
+		lineageTag: 1277017b-5aa6-4c90-a1a3-e4a474ca1bb9
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'High Market Potential Revenue' = CALCULATE([Total Revenue],FILTER(Country,Country[Market_Potential]="High"))
+		formatString: 0
+		lineageTag: 71633b43-2681-40c1-91bd-1c3be9de52e0
+
+	measure 'Very High Market Potential Revenue' = CALCULATE([Total Revenue],FILTER(Country,Country[Market_Potential]="Very High"))
+		formatString: 0
+		lineageTag: 30af4c01-c4d3-482b-86ea-1f64687abcce
+
+	measure 'Medium Market Potential Revenue' = CALCULATE([Total Revenue],FILTER(Country,Country[Market_Potential]="Medium"))
+		formatString: 0
+		lineageTag: 97b39134-6b74-42ca-806d-87fafe63645e
+
+	measure 'High Market Customers' = CALCULATE([Total Orders],FILTER(Country,Country[Market_Potential]="High"))
+		formatString: 0
+		lineageTag: 61ca833a-0d94-4e1a-8e02-5c0d65a0075f
+
+	measure 'Very High Market Customers' = CALCULATE([Total Orders],FILTER(Country,Country[Market_Potential]="Very High"))
+		formatString: 0
+		lineageTag: d71ece78-1f99-4f3f-a8da-dc77ffaf3fdf
+
+	measure 'Medium Market Customers' = CALCULATE([Total Orders],FILTER(Country,Country[Market_Potential]="Medium"))
+		formatString: 0
+		lineageTag: c58ecb9e-caca-459e-b8fd-b0a10b77067d
+
+	measure 'Currency Ranking By Revenue' = RANKX(ALL(Country[Country]),[Total Revenue])
+		formatString: 0
+		lineageTag: fac659fb-065c-4b43-9200-e7b2a3cbebba
+
+	measure 'Currency Ranking By Orders' = RANKX(ALL(Country[Country]),[Total Orders])
+		formatString: 0
+		lineageTag: 23561f35-5178-4976-9b03-9ae95a47b12d
+
+	measure 'Customers By USD' = CALCULATE([Total Orders],FILTER(Country,Country[Currency]="USD"))
+		formatString: 0
+		lineageTag: 9246af5a-83cb-4406-87db-519a4d00c964
+
+	measure 'Customers By AUD' = CALCULATE([Total Orders],FILTER(Country,Country[Currency]="AUD"))
+		formatString: 0
+		lineageTag: c73c9afb-146c-4323-9c74-9f9c5d7fb49c
+
+	measure 'Customers By CAD' = CALCULATE([Total Orders],FILTER(Country,Country[Currency]="CAD"))
+		formatString: 0
+		lineageTag: e13ce6ef-07c5-4861-9a32-ef43bf8108c6
+
+	measure 'Customers By GBP' = CALCULATE([Total Orders],FILTER(Country,Country[Currency]="GBP"))
+		formatString: 0
+		lineageTag: 26c63078-17a2-41fb-9c78-04c978efb36a
+
+	measure 'Customers By INR' = CALCULATE([Total Orders],FILTER(Country,Country[Currency]="INR"))
+		formatString: 0
+		lineageTag: 12b1f746-f6ae-404f-840b-5c8ede373f39
+
+	measure 'Customers By NZD' = CALCULATE([Total Orders],FILTER(Country,Country[Currency]="NZD"))
+		formatString: 0
+		lineageTag: 12f5a72d-c88c-4325-8748-3bd27523282f
+
+	measure 'Australia Delivered Orders' = CALCULATE([Total Orders],Country[Country]="Australia",Shipment[Shipment_Status]="Delivered")
+		formatString: 0
+		lineageTag: 2c40a301-8f7e-466e-8e52-b88caacfa838
+
+	measure 'Australia Out For Delivery Orders' = CALCULATE([Total Orders],Country[Country]="Australia",Shipment[Shipment_Status]="Out For Delivery")
+		formatString: 0
+		lineageTag: 3d792000-a3bd-4aba-87c2-b4834d32ddc5
+
+	measure 'Australia In Transit Orders' = CALCULATE([Total Orders],Country[Country]="Australia",Shipment[Shipment_Status]="In Transit")
+		formatString: 0
+		lineageTag: 78cd71db-5520-4847-af42-e8ef971113fb
+
+	measure 'Australia Processing Orders' = CALCULATE([Total Orders],Country[Country]="Australia",Shipment[Shipment_Status]="Processing")
+		formatString: 0
+		lineageTag: 57165721-4e5a-4756-89d2-9701b7bbd915
+
+	measure 'USA Delivered Orders' = CALCULATE([Total Orders],Country[Country]="USA",Shipment[Shipment_Status]="Delivered")
+		formatString: 0
+		lineageTag: 67495ceb-70c9-40a9-a4aa-56ed3a7aae10
+
+	measure 'USA Out For Delivery Orders' = CALCULATE([Total Orders],Country[Country]="USA",Shipment[Shipment_Status]="Out For Delivery")
+		formatString: 0
+		lineageTag: 88e630f4-a575-4895-9238-ef99f6fbe2ed
+
+	measure 'Country Rank By Qnty' = RANKX(ALL(Country[Country]),[Total Qnty])
+		formatString: 0
+		lineageTag: 3b3fb57d-bc36-477e-9880-ea6bf4beb365
+
+	column Order_ID
+		dataType: int64
+		formatString: 0
+		lineageTag: 0848bdec-d46e-4f81-9d15-f1ace272b0b5
+		summarizeBy: none
+		sourceColumn: Order_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country
+		dataType: string
+		lineageTag: 93c0348e-c983-4f78-bff3-828684b98262
+		dataCategory: Uncategorized
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column Continent
+		dataType: string
+		lineageTag: 4599e214-dbea-44ba-bace-6230ac81e606
+		summarizeBy: none
+		sourceColumn: Continent
+
+		annotation SummarizationSetBy = Automatic
+
+	column Currency
+		dataType: string
+		lineageTag: fe187170-6725-4eba-b5f3-9971a545d8f3
+		summarizeBy: none
+		sourceColumn: Currency
+
+		annotation SummarizationSetBy = Automatic
+
+	column ISO_Code
+		dataType: string
+		lineageTag: 3721ee41-3b6f-4a93-9d3d-0f2de11889c4
+		summarizeBy: none
+		sourceColumn: ISO_Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column Official_Language
+		dataType: string
+		lineageTag: a23fa5ef-645f-4be9-8645-7ee9155434c8
+		summarizeBy: none
+		sourceColumn: Official_Language
+
+		annotation SummarizationSetBy = Automatic
+
+	column Population_Millions
+		dataType: double
+		lineageTag: 56ba1454-3b93-4e8c-81c1-f7495c00473d
+		summarizeBy: sum
+		sourceColumn: Population_Millions
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Time_Zone
+		dataType: string
+		lineageTag: 53ab3587-fd13-4a7c-af06-040a963611f6
+		summarizeBy: none
+		sourceColumn: Time_Zone
+
+		annotation SummarizationSetBy = Automatic
+
+	column Internet_Penetration_%
+		dataType: int64
+		formatString: 0
+		lineageTag: c10c3a33-695c-4cab-87c8-cea1dd9ea71b
+		summarizeBy: sum
+		sourceColumn: Internet_Penetration_%
+
+		annotation SummarizationSetBy = Automatic
+
+	column Market_Potential
+		dataType: string
+		lineageTag: 07558f0b-bfa2-40c9-ac88-508c0a37b4f9
+		summarizeBy: none
+		sourceColumn: Market_Potential
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Country = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\ponki.LUCKY\OneDrive\Desktop\Internship\Chocolate Full Data\Chocolate Full Data\Country.xlsx"), null, true),
+				    Country_Table = Source{[Item="Country",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(Country_Table,{{"Order_Id", Int64.Type}, {"Country", type text}, {"Continent", type text}, {"Currency", type text}, {"ISO_Code", type text}, {"Official_Language", type text}, {"Population_Millions", type number}, {"Time_Zone", type text}, {"Internet_Penetration_%", Int64.Type}, {"Market_Potential", type text}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"Order_Id", "Order_ID"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

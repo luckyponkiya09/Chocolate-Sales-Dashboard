@@ -1,0 +1,189 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/report/3.3.0/schema.json",
+  "themeCollection": {
+    "baseTheme": {
+      "name": "CY24SU10",
+      "reportVersionAtImport": {
+        "visual": "1.8.95",
+        "report": "2.0.95",
+        "page": "1.3.95"
+      },
+      "type": "SharedResources"
+    }
+  },
+  "objects": {
+    "section": [
+      {
+        "properties": {
+          "verticalAlignment": {
+            "expr": {
+              "Literal": {
+                "Value": "'Top'"
+              }
+            }
+          }
+        }
+      }
+    ],
+    "outspacePane": [
+      {
+        "properties": {
+          "expanded": {
+            "expr": {
+              "Literal": {
+                "Value": "false"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "resourcePackages": [
+    {
+      "name": "SharedResources",
+      "type": "SharedResources",
+      "items": [
+        {
+          "name": "CY24SU10",
+          "path": "BaseThemes/CY24SU10.json",
+          "type": "BaseTheme"
+        }
+      ]
+    },
+    {
+      "name": "RegisteredResources",
+      "type": "RegisteredResources",
+      "items": [
+        {
+          "name": "Background7289640291693185.png",
+          "path": "Background7289640291693185.png",
+          "type": "Image"
+        },
+        {
+          "name": "c1114333930367140546.png",
+          "path": "c1114333930367140546.png",
+          "type": "Image"
+        },
+        {
+          "name": "c127295445315435322.png",
+          "path": "c127295445315435322.png",
+          "type": "Image"
+        },
+        {
+          "name": "c1302216315953614345.png",
+          "path": "c1302216315953614345.png",
+          "type": "Image"
+        },
+        {
+          "name": "c148178179072832498.png",
+          "path": "c148178179072832498.png",
+          "type": "Image"
+        },
+        {
+          "name": "c159291509777253835.png",
+          "path": "c159291509777253835.png",
+          "type": "Image"
+        },
+        {
+          "name": "c16499145191785463.png",
+          "path": "c16499145191785463.png",
+          "type": "Image"
+        },
+        {
+          "name": "c170602519698517755.png",
+          "path": "c170602519698517755.png",
+          "type": "Image"
+        },
+        {
+          "name": "c2214735608813214696.png",
+          "path": "c2214735608813214696.png",
+          "type": "Image"
+        },
+        {
+          "name": "c43149742703423447.png",
+          "path": "c43149742703423447.png",
+          "type": "Image"
+        },
+        {
+          "name": "c5509447528011764361.png",
+          "path": "c5509447528011764361.png",
+          "type": "Image"
+        },
+        {
+          "name": "c665268900051875922.png",
+          "path": "c665268900051875922.png",
+          "type": "Image"
+        },
+        {
+          "name": "c6921211189326467.png",
+          "path": "c6921211189326467.png",
+          "type": "Image"
+        },
+        {
+          "name": "c76024226395166675.png",
+          "path": "c76024226395166675.png",
+          "type": "Image"
+        },
+        {
+          "name": "c88231315118690186.png",
+          "path": "c88231315118690186.png",
+          "type": "Image"
+        },
+        {
+          "name": "c909773550265278608.png",
+          "path": "c909773550265278608.png",
+          "type": "Image"
+        },
+        {
+          "name": "Group_407948199891529828.png",
+          "path": "Group_407948199891529828.png",
+          "type": "Image"
+        },
+        {
+          "name": "Group_44449169188205716.png",
+          "path": "Group_44449169188205716.png",
+          "type": "Image"
+        },
+        {
+          "name": "Group_46224500788414961.png",
+          "path": "Group_46224500788414961.png",
+          "type": "Image"
+        },
+        {
+          "name": "Group_48596002951385284.png",
+          "path": "Group_48596002951385284.png",
+          "type": "Image"
+        },
+        {
+          "name": "Group_514561406174983316.png",
+          "path": "Group_514561406174983316.png",
+          "type": "Image"
+        },
+        {
+          "name": "Group_52943711940879332.png",
+          "path": "Group_52943711940879332.png",
+          "type": "Image"
+        },
+        {
+          "name": "Group_55107441685756812.png",
+          "path": "Group_55107441685756812.png",
+          "type": "Image"
+        },
+        {
+          "name": "Group_56066254830014877.png",
+          "path": "Group_56066254830014877.png",
+          "type": "Image"
+        }
+      ]
+    }
+  ],
+  "settings": {
+    "useStylableVisualContainerHeader": true,
+    "exportDataMode": "AllowSummarized",
+    "defaultDrillFilterOtherVisuals": true,
+    "allowChangeFilterTypes": true,
+    "useEnhancedTooltips": true,
+    "useDefaultAggregateDisplayName": true
+  }
+}

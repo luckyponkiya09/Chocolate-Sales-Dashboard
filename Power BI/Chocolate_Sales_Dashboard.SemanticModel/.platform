@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Chocolate_Sales_Dashboard"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "884b4908-289d-49cb-9aa8-83a27c9754b3"
+  }
+}

@@ -1,0 +1,157 @@
+table Sales_Person
+	lineageTag: 3a0971c9-aae7-4088-b999-583c6f5a31c0
+
+	measure 'Total Customers' = DISTINCTCOUNT(Sales_Person[  Sales Person  ])
+		formatString: 0
+		lineageTag: 61f5b40a-347f-4146-8d38-dc38e6292322
+
+	measure 'Avg Orders Per Customer' = DIVIDE([Total Orders],[Total Customers])
+		lineageTag: 33ac023a-d014-4e67-95d1-5810588b2001
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Avg Revenue Per Customer' = DIVIDE([Total Revenue],[Total Customers])
+		lineageTag: 9a87581c-9bf2-4f3f-b20f-b081d93b2e98
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Avg Qty Per Customer' = DIVIDE(SUM(Chocolate_Sales[Quantity Sold]),[Total Customers])
+		lineageTag: bd842d77-6ca9-4c5a-bf06-1cee6edf226f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'USA Customers' = CALCULATE(DISTINCTCOUNT(Sales_Person[  Sales Person  ]),Sales_Person[  Country  ]="USA")
+		formatString: 0
+		lineageTag: 6dfec7c5-cb80-418f-9718-8b3763a89912
+
+	measure 'INDIA Customers' = CALCULATE(DISTINCTCOUNT(Sales_Person[  Sales Person  ]),Sales_Person[  Country  ]="INDIA")
+		formatString: 0
+		lineageTag: ea3b0ae8-c529-4f36-ad48-a69d35d7383a
+
+	measure 'UK Customers' = CALCULATE(DISTINCTCOUNT(Sales_Person[  Sales Person  ]),Sales_Person[  Country  ]="UK")
+		formatString: 0
+		lineageTag: 95bbdb18-fcd1-4330-9c64-e76307ced6d2
+
+	measure 'CANADA Customers' = CALCULATE(DISTINCTCOUNT(Sales_Person[  Sales Person  ]),Sales_Person[  Country  ]="CANADA")
+		formatString: 0
+		lineageTag: 0934a3ec-ffa9-41e1-a5ce-361d952f41b3
+
+	measure 'NEW ZEALAND Customers' = CALCULATE(DISTINCTCOUNT(Sales_Person[  Sales Person  ]),Sales_Person[  Country  ]="NEW ZEALAND")
+		formatString: 0
+		lineageTag: 15cfedd3-6c61-40e5-b324-55009ffc4a11
+
+	measure 'AUSTRALIA Customers' = CALCULATE(DISTINCTCOUNT(Sales_Person[  Sales Person  ]),Sales_Person[  Country  ]="AUSTRALIA")
+		formatString: 0
+		lineageTag: 2ef892c7-a0ae-45d9-bc79-e4e285183e1a
+
+	measure 'Team Titans Customers' = CALCULATE(DISTINCTCOUNT(Sales_Person[  Sales Person  ]),Sales_Person[Sales Team]="Team Titans")
+		formatString: 0
+		lineageTag: ff12c4f5-4520-4048-ae35-05c5135d6e81
+
+	measure 'Team Alpha Customers' = CALCULATE(DISTINCTCOUNT(Sales_Person[  Sales Person  ]),Sales_Person[Sales Team]="Team Alpha")
+		formatString: 0
+		lineageTag: f282304e-c75a-4545-ac80-e3b9e4fce701
+
+	measure 'Team Bravo Customers' = CALCULATE(DISTINCTCOUNT(Sales_Person[  Sales Person  ]),Sales_Person[Sales Team]="Team Bravo")
+		formatString: 0
+		lineageTag: 23751c7b-0168-4366-9380-3368a0c2d23f
+
+	measure 'Team Omega Customers' = CALCULATE(DISTINCTCOUNT(Sales_Person[  Sales Person  ]),Sales_Person[Sales Team]="Team Omega")
+		formatString: 0
+		lineageTag: a19ef793-ecc6-467e-8588-eaa18db61ef6
+
+	measure 'Team Quota Customers' = CALCULATE(DISTINCTCOUNT(Sales_Person[  Sales Person  ]),Sales_Person[Sales Team]="Team Quota")
+		formatString: 0
+		lineageTag: 65d14304-782b-40d6-91eb-8a0d5ef66cc8
+
+	measure 'Team Star Customers' = CALCULATE(DISTINCTCOUNT(Sales_Person[  Sales Person  ]),Sales_Person[Sales Team]="Team Star")
+		formatString: 0
+		lineageTag: deb74ab3-7069-4e18-b79a-cd4cd4b2c51a
+
+	measure 'Team Titans Revenue' = CALCULATE([Total Revenue],Sales_Person[Sales Team]="Team Titans")
+		formatString: 0
+		lineageTag: d83e550c-8272-494d-9060-617f3b2813a4
+
+	measure 'Team Alpha Revenue' = CALCULATE([Total Revenue],Sales_Person[Sales Team]="Team Alpha")
+		formatString: 0
+		lineageTag: b9f9472d-b60a-4516-9e9a-84bc1a3b6260
+
+	measure 'Team Bravo Revenue' = CALCULATE([Total Revenue],Sales_Person[Sales Team]="Team Bravo")
+		formatString: 0
+		lineageTag: 89170613-c24b-43bb-8c33-ec415eba6f2c
+
+	measure 'Team Quota Revenue' = CALCULATE([Total Revenue],Sales_Person[Sales Team]="Team Quota")
+		formatString: 0
+		lineageTag: 81e88f9e-e42e-42b5-8ce6-b739e77e0a7b
+
+	measure 'Team Star Revenue' = CALCULATE([Total Revenue],Sales_Person[Sales Team]="Team Star")
+		formatString: 0
+		lineageTag: 8a66c626-526c-462c-bd70-aa54e8f0e7fa
+
+	measure 'Team Omega Revenue' = CALCULATE([Total Revenue],Sales_Person[Sales Team]="Team Omega")
+		formatString: 0
+		lineageTag: 4278f841-e243-4331-a626-e95bd2aaad82
+
+	measure 'Top Revenue Team Rank' = RANKX(ALL(Sales_Person[Sales Team]),[Total Revenue])
+		formatString: 0
+		lineageTag: cff7cf51-0550-4633-8241-965e427cfbf9
+
+	measure 'Top Orders Team Rank' = RANKX(ALL(Sales_Person[Sales Team]),[Total Orders])
+		formatString: 0
+		lineageTag: 48dc8e6e-b252-46a2-9b8f-1ef7a01549a2
+
+	column '  Order_ID  '
+		dataType: int64
+		formatString: 0
+		lineageTag: 731a29e8-5681-4c14-9bfa-7a3c24e20531
+		summarizeBy: none
+		sourceColumn: "  Order_ID  "
+
+		annotation SummarizationSetBy = Automatic
+
+	column '  Sales Person  '
+		dataType: string
+		lineageTag: f8cadabd-4be8-4b2f-84d4-225e92c3ff46
+		summarizeBy: none
+		sourceColumn: "  Sales Person  "
+
+		annotation SummarizationSetBy = Automatic
+
+	column Employee_ID
+		dataType: string
+		lineageTag: b1970e97-2228-4626-99f0-4135c483294c
+		summarizeBy: none
+		sourceColumn: Employee_ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column '  Country  '
+		dataType: string
+		lineageTag: fabfa685-23e9-4d0b-9b9a-73edff6681e0
+		summarizeBy: none
+		sourceColumn: "  Country  "
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sales Team'
+		dataType: string
+		lineageTag: 013592a7-4054-473a-a7f5-50168312e668
+		summarizeBy: none
+		sourceColumn: Sales Team
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Sales_Person = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\ponki.LUCKY\OneDrive\Desktop\Internship\Chocolate Full Data\Chocolate Full Data\Sales Person.xlsx"), null, true),
+				    Sales_Person_Table = Source{[Item="Sales_Person",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(Sales_Person_Table,{{"  Order_ID  ", Int64.Type}, {"  Sales Person  ", type text}, {"Employee_ID", type text}, {"  Country  ", type text}, {"Sales Team", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,167 @@
+table Products
+	lineageTag: 863e62c8-7a37-4d16-8e2a-8614eddbf5de
+
+	measure 'Total Products' = DISTINCTCOUNT(Products[  Product  ])
+		formatString: 0
+		lineageTag: 50bf484d-a024-4e19-aa86-7248a07dcb52
+
+	measure 'Total Product Revenue' = SUM(Chocolate_Sales[Total Sales])
+		formatString: "₹"\ #,0.###############;#,0.###############\ -"₹";"₹"\ #,0.###############
+		lineageTag: bf642bf2-b451-4f58-885f-3698571a0dc8
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-IN"}
+
+	measure 'Avg Revenue Per Product' =
+			
+			DIVIDE(
+			    [Total Product Revenue],
+			    [Total Products]
+			)
+		formatString: "₹"\ #,0.###############;#,0.###############\ -"₹";"₹"\ #,0.###############
+		lineageTag: a31bd642-7aed-48a7-bca0-d2e677921105
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-IN"}
+
+	measure 'Total Quantity Sold' = SUM(Chocolate_Sales[Quantity Sold])
+		formatString: 0
+		lineageTag: 51367a60-25c5-48e3-a46a-7cc1d8ba53a3
+
+	measure 'Avg Qnty Per Product' =
+			
+			DIVIDE(
+			    [Total Quantity Sold],
+			    [Total Products]
+			)
+		lineageTag: 64930cc8-1982-4aa3-a482-0eed2871ee94
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'High Sugar Products' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(Products[  Product  ]),
+			    Products[Sugar Level]="High"
+			)
+		formatString: 0
+		lineageTag: 8e51c695-03cc-4895-9cd4-2b57ffad2a14
+
+	measure 'Medium Sugar Products' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(Products[  Product  ]),
+			    Products[Sugar Level]="Medium"
+			)
+		formatString: 0
+		lineageTag: c5052f0b-2d4e-45d4-bf5f-d69d9bb7082a
+
+	measure 'Low Sugar Products' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(Products[  Product  ]),
+			    Products[Sugar Level]="Low"
+			)
+		formatString: 0
+		lineageTag: a76e5c2a-7097-4b69-a0b5-e3459d7fb565
+
+	measure 'High Sugar Revenue' =
+			
+			CALCULATE(
+			    [Total Revenue],
+			    Products[Sugar Level]="High"
+			)
+		formatString: 0
+		lineageTag: d5693958-41da-49ea-a206-f543bc445b86
+
+	measure 'Medium Sugar Revenue' =
+			
+			CALCULATE(
+			    [Total Revenue],
+			    Products[Sugar Level]="Medium"
+			)
+		formatString: 0
+		lineageTag: 1046ee43-9037-46e9-8d2e-74657216001b
+
+	measure 'Low Sugar Revenue' =
+			
+			CALCULATE(
+			    [Total Revenue],
+			    Products[Sugar Level]="Low"
+			)
+		formatString: 0
+		lineageTag: 21dc15ac-6a39-4be2-8cd4-b6071e031759
+
+	measure 'Product Revenue Rank' =
+			
+			RANKX(
+			    ALL(Products[  Product  ]),
+			    [Total Revenue]
+			)
+		formatString: 0
+		lineageTag: b7bbc996-9c55-4cda-bc9c-342f0a3e67d7
+
+	measure 'Product Orders Rank' =
+			
+			RANKX(
+			    ALL(Products[  Product  ]),
+			    [Total Orders]
+			)
+		formatString: 0
+		lineageTag: ccb902d8-352d-4fe7-8e51-3346f12ce1f6
+
+	measure 'Avg Orders Per Product' =
+			
+			DIVIDE(
+			    [Total Orders],
+			    [Total Products]
+			)
+		lineageTag: 00cff1a6-342d-43ca-b6bc-456671cb4649
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column '  Order_ID  '
+		dataType: int64
+		formatString: 0
+		lineageTag: b27c99ce-148d-4d71-8923-a23d29f8e5ce
+		summarizeBy: none
+		sourceColumn: "  Order_ID  "
+
+		annotation SummarizationSetBy = Automatic
+
+	column '  Product  '
+		dataType: string
+		lineageTag: 8cd08a7f-83c5-4fc9-b282-7cda1df1c4ef
+		summarizeBy: none
+		sourceColumn: "  Product  "
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product ID'
+		dataType: string
+		lineageTag: a1bc9181-f9e7-41ef-96f3-04c6cf3c0258
+		summarizeBy: none
+		sourceColumn: Product ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Sugar Level'
+		dataType: string
+		lineageTag: b0c9db15-ea0c-489f-9c18-feb65cd363b3
+		summarizeBy: none
+		sourceColumn: Sugar Level
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Products = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\ponki.LUCKY\OneDrive\Desktop\Internship\Chocolate Full Data\Chocolate Full Data\Products.xlsx"), null, true),
+				    Products_Table = Source{[Item="Products",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(Products_Table,{{"  Order_ID  ", Int64.Type}, {"  Product  ", type text}, {"Product ID", type text}, {"Sugar Level", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

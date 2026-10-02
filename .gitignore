@@ -1,0 +1,11 @@
+```gitignore
+# Power BI local files
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+
+# Python virtual environment
+Chocolate-Sales-Dashboard/LLM/venv/
+
+# Environment variables and secrets
+Chocolate-Sales-Dashboard/LLM/.env
+```

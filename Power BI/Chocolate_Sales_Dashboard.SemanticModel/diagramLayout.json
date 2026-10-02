@@ -1,0 +1,113 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 90.065765467470072
+          },
+          "nodeIndex": "Chocolate_Sales",
+          "nodeLineageTag": "a53678a7-b623-468a-8a11-a36643471a67",
+          "size": {
+            "height": 465.91062059797116,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 1197.2984638631174,
+            "y": 486.6711537540487
+          },
+          "nodeIndex": "Country",
+          "nodeLineageTag": "434877d3-5442-439a-b4c8-be40ded7cf6d",
+          "size": {
+            "height": 339.50252871380269,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 525.3372689890931,
+            "y": 0
+          },
+          "nodeIndex": "Products",
+          "nodeLineageTag": "863e62c8-7a37-4d16-8e2a-8614eddbf5de",
+          "size": {
+            "height": 187.06070803986472,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 428.53289218803559,
+            "y": 654.88025712373815
+          },
+          "nodeIndex": "Region",
+          "nodeLineageTag": "409d96bc-d9bd-47b0-b070-81d74602e14e",
+          "size": {
+            "height": 262.22091033696904,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 357.01013376381189,
+            "y": 288.595273431368
+          },
+          "nodeIndex": "Sales_Person",
+          "nodeLineageTag": "3a0971c9-aae7-4088-b999-583c6f5a31c0",
+          "size": {
+            "height": 204.74030344565631,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 1156.1231081917983,
+            "y": 1.3591908115831526
+          },
+          "nodeIndex": "Shipment",
+          "nodeLineageTag": "eff951d2-a69a-42e2-b918-f923bac250e7",
+          "size": {
+            "height": 284.64080918841688,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 800.36759464612373,
+            "y": 232.70572859985251
+          },
+          "nodeIndex": "Chocolate_Full",
+          "nodeLineageTag": "6b179f8e-426c-4d01-b818-82f6fda7fd5c",
+          "size": {
+            "height": 344.24283215945889,
+            "width": 234
+          },
+          "zIndex": 6
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 63.287087723234038,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

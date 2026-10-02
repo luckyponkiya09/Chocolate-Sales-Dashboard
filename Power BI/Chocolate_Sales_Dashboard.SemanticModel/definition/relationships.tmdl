@@ -1,0 +1,60 @@
+relationship 1cc2b24f-a521-4484-a53e-19f36ce20b73
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Chocolate_Sales.'  Date  '
+	toColumn: LocalDateTable_5c4497cc-41d6-4a76-a60d-ae73e494d171.Date
+
+relationship 84957de4-751b-d8f2-b8d3-f0ade4d70bda
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: Chocolate_Full.'  Order_ID  '
+	toColumn: Shipment.'  Order_ID  '
+
+relationship efc7f927-4b3a-bc1d-bab2-4a88f538af90
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: Country.Order_ID
+	toColumn: Chocolate_Full.'  Order_ID  '
+
+relationship 87e1efba-bfa9-dd3e-655e-2ad6df62d6f6
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: Region.'  Order_ID  '
+	toColumn: Chocolate_Full.'  Order_ID  '
+
+relationship d4f2fa82-739d-643e-290d-9016752bcb7a
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: Sales_Person.'  Order_ID  '
+	toColumn: Chocolate_Full.'  Order_ID  '
+
+relationship 7b4eaa59-f08b-8f79-234e-fe22672e0762
+	crossFilteringBehavior: bothDirections
+	toCardinality: many
+	fromColumn: Products.'  Order_ID  '
+	toColumn: Chocolate_Full.'  Order_ID  '
+
+relationship 0ce6f533-b84e-40ff-7ac4-2d4fbc98cc2b
+	isActive: false
+	fromColumn: Products.'  Order_ID  '
+	toColumn: Chocolate_Sales.'  Order_ID  '
+
+relationship 028b8662-d5eb-fc64-dd84-be13d498dcff
+	isActive: false
+	fromColumn: Shipment.'  Order_ID  '
+	toColumn: Chocolate_Sales.'  Order_ID  '
+
+relationship c21f191c-383a-bae7-338d-570870e13aad
+	isActive: false
+	fromColumn: Region.'  Order_ID  '
+	toColumn: Chocolate_Sales.'  Order_ID  '
+
+relationship 68a9ae37-e6b6-1cb2-1944-bc9254785cd8
+	isActive: false
+	fromColumn: Sales_Person.'  Order_ID  '
+	toColumn: Chocolate_Sales.'  Order_ID  '
+
+relationship c8886553-9c69-1566-50a5-edf28784719c
+	crossFilteringBehavior: bothDirections
+	fromColumn: Country.Order_ID
+	toColumn: Chocolate_Sales.'  Order_ID  '
+

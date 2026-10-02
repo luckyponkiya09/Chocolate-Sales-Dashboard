@@ -1,0 +1,211 @@
+table Shipment
+	lineageTag: eff951d2-a69a-42e2-b918-f923bac250e7
+
+	measure 'Total Shipments' = DISTINCTCOUNT(Shipment[  Order_ID  ])
+		formatString: 0
+		lineageTag: b734417f-9495-4fdd-8f9d-9d2aaf68c794
+
+	measure 'Boxes Shipped' = SUM(Shipment[  Boxes Shipped  ])
+		formatString: 0
+		lineageTag: bd03244c-cf33-4c7f-ba8c-01d5fcdac307
+
+	measure 'Delivered Orders' =
+			
+			CALCULATE(
+			    DISTINCTCOUNT(Shipment[  Order_ID  ]),
+			    Shipment[Shipment_Status]="Delivered"
+			)
+		formatString: 0
+		lineageTag: 29a21117-972c-4289-846f-d08fd9119306
+
+	measure 'Delivery Success %' = DIVIDE([Delivered Orders],[Total Shipments])
+		lineageTag: c1eaa97e-ecc6-406c-8ee9-9f8ee33efe3f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Out For Delivery Orders' = CALCULATE([Total Orders],Shipment[Shipment_Status]="Out for Delivery")
+		formatString: 0
+		lineageTag: 9ab30052-684c-48bf-9e49-fe37c6f8aa4e
+
+	measure 'In Transit Orders' = CALCULATE([Total Orders],Shipment[Shipment_Status]="In Transit")
+		formatString: 0
+		lineageTag: 9c86e648-7e1d-4bc0-b7e4-a9d6230acb81
+
+	measure 'Processing Orders' = CALCULATE([Total Orders],Shipment[Shipment_Status]="Processing")
+		formatString: 0
+		lineageTag: ae6a0fa9-8a09-4f37-b7db-4c0525dba714
+
+	measure 'High Priority Orders' = CALCULATE([Total Orders],Shipment[Delivery_Priority]="High")
+		formatString: 0
+		lineageTag: 5fbe67b8-ad43-4646-b398-d26a941f38b7
+
+	measure 'Medium Priority Orders' = CALCULATE([Total Orders],Shipment[Delivery_Priority]="Medium")
+		formatString: 0
+		lineageTag: 6dfcbefd-357c-417a-a1c1-44486944ebe0
+
+	measure 'Low Priority Orders' = CALCULATE([Total Orders],Shipment[Delivery_Priority]="Low")
+		formatString: 0
+		lineageTag: 97ddf6da-15b0-4551-bd5c-25da65bccb1a
+
+	measure 'Average Boxes Per Order' = DIVIDE([Total Boxes Shipped],[Total Orders])
+		lineageTag: faf9663a-dc7d-4e2d-8722-0be7091d406d
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'High Risk Shipments' = CALCULATE([Total Orders],Shipment[Damage_Risk]="High")
+		formatString: 0
+		lineageTag: f82a33a3-0290-447f-8b3d-4d764461cf74
+
+	measure 'Low Risk Shipments' = CALCULATE([Total Orders],Shipment[Damage_Risk]="Low")
+		formatString: 0
+		lineageTag: fab71582-dc20-4129-95a2-c0b1fecd36ee
+
+	measure 'DHL Orders' = CALCULATE([Total Orders],Shipment[Carrier]="DHL")
+		formatString: 0
+		lineageTag: 64d2eb4b-cf01-44de-a17b-737065de858b
+
+	measure 'FedEx Orders' = CALCULATE([Total Orders],Shipment[Carrier]="FedEx")
+		formatString: 0
+		lineageTag: b4022d77-69ab-4d3b-a6eb-30e3995c0b60
+
+	measure 'UPS Orders' = CALCULATE([Total Orders],Shipment[Carrier]="UPS")
+		formatString: 0
+		lineageTag: 340b3578-c7fe-4bf9-9546-3860946a55ee
+
+	measure 'Blue Dart Orders' = CALCULATE([Total Orders],Shipment[Carrier]="Blue Dart")
+		formatString: 0
+		lineageTag: 2b75fbeb-2c23-4e4c-9969-d1972fd9218c
+
+	measure 'Logistics Cost' = SUM(Chocolate_Sales[Delivery Cost])
+		formatString: "₹"\ #,0.###############;#,0.###############\ -"₹";"₹"\ #,0.###############
+		lineageTag: 8e49f659-87f6-4875-8bee-12d120f51a8e
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-IN"}
+
+	measure 'Shipment Efficiency Score' = DIVIDE([Delivered Orders],[Total Shipments]) * 100
+		lineageTag: 3e907652-2725-4abb-a60e-7a9273ffa210
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Medium Risk Shipments' = CALCULATE([Total Orders],Shipment[Damage_Risk]="Medium")
+		formatString: 0
+		lineageTag: 8fd0e284-d3fd-42d5-847a-87ca1bcb99a4
+
+	measure 'Active Tracking Orders' = CALCULATE([Total Orders],Shipment[Tracking_Status] = "Active")
+		formatString: 0
+		lineageTag: 28adaa4c-ed13-47ff-903d-a18e98652cd7
+
+	measure 'Completed Orders' = CALCULATE([Total Orders],Shipment[Tracking_Status] = "Completed")
+		formatString: 0
+		lineageTag: f4df47c2-b689-4a5d-8273-c5c75d899a87
+
+	measure 'Retail Customer Orders' = CALCULATE([Total Orders],Shipment[Customer_Type] = "Retail")
+		formatString: 0
+		lineageTag: 7948ecc2-4cdf-4162-92d3-e997df2e298e
+
+	measure 'Wholesale Customer Orders' = CALCULATE([Total Orders],Shipment[Customer_Type] = "Wholesale")
+		formatString: 0
+		lineageTag: ea8f8d93-2b77-4225-92d9-f36b898e8926
+
+	measure 'High Priority Delivered Orders' = CALCULATE([Total Orders],Shipment[Delivery_Priority] = "High",Shipment[Shipment_Status] = "Delivered")
+		formatString: 0
+		lineageTag: 639ecffd-557b-43cd-99ca-e513c533b588
+
+	measure 'High Risk Delivered Orders' = CALCULATE([Total Orders],Shipment[Damage_Risk] = "High",Shipment[Shipment_Status] = "Delivered")
+		formatString: 0
+		lineageTag: 795716e7-5f87-47ad-bd22-a6788c566708
+
+	measure 'Delivered Boxes' = CALCULATE(SUM(Shipment[  Boxes Shipped  ]),Shipment[Shipment_Status] = "Delivered")
+		formatString: 0
+		lineageTag: 0e96193d-d945-4c29-8813-bd5e758019c7
+
+	measure 'High Priority Success %' = DIVIDE([High Priority Delivered Orders],[High Priority Orders])
+		lineageTag: a544bd9b-a187-4728-818a-4f3197e92daf
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Active Tracking %' = DIVIDE([Active Tracking Orders],[Total Shipments])
+		lineageTag: 14419baa-5e97-4ade-8606-6ba1de0f7173
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column '  Order_ID  '
+		dataType: int64
+		formatString: 0
+		lineageTag: e71d2947-0530-4a26-baa2-549069901829
+		summarizeBy: none
+		sourceColumn: "  Order_ID  "
+
+		annotation SummarizationSetBy = Automatic
+
+	column '  Boxes Shipped  '
+		dataType: int64
+		formatString: 0
+		lineageTag: 78706f3e-64fd-40de-8666-0db7bbec26e5
+		summarizeBy: sum
+		sourceColumn: "  Boxes Shipped  "
+
+		annotation SummarizationSetBy = Automatic
+
+	column Shipment_Status
+		dataType: string
+		lineageTag: 3d78ac57-970e-4b81-a561-826cab965ff6
+		summarizeBy: none
+		sourceColumn: Shipment_Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column Delivery_Priority
+		dataType: string
+		lineageTag: b9cdf3f5-0671-4465-9e72-a1a941fd86b8
+		summarizeBy: none
+		sourceColumn: Delivery_Priority
+
+		annotation SummarizationSetBy = Automatic
+
+	column Carrier
+		dataType: string
+		lineageTag: 50e4b3c9-9445-45f0-b05c-93b8c266a7fb
+		summarizeBy: none
+		sourceColumn: Carrier
+
+		annotation SummarizationSetBy = Automatic
+
+	column Damage_Risk
+		dataType: string
+		lineageTag: 8b84c51b-6915-49e8-bbba-3367204bff64
+		summarizeBy: none
+		sourceColumn: Damage_Risk
+
+		annotation SummarizationSetBy = Automatic
+
+	column Tracking_Status
+		dataType: string
+		lineageTag: 23d3e82f-507e-4a96-bbce-60b8befe1c22
+		summarizeBy: none
+		sourceColumn: Tracking_Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column Customer_Type
+		dataType: string
+		lineageTag: bb220fc0-fa63-49c0-bfcb-bed94bece897
+		summarizeBy: none
+		sourceColumn: Customer_Type
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Shipment = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\ponki.LUCKY\OneDrive\Desktop\Internship\Chocolate Full Data\Chocolate Full Data\Shipment.xlsx"), null, true),
+				    Shipment_Table = Source{[Item="Shipment",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(Shipment_Table,{{"  Order_ID  ", Int64.Type}, {"  Boxes Shipped  ", Int64.Type}, {"Shipment_Status", type text}, {"Delivery_Priority", type text}, {"Carrier", type text}, {"Damage_Risk", type text}, {"Tracking_Status", type text}, {"Customer_Type", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

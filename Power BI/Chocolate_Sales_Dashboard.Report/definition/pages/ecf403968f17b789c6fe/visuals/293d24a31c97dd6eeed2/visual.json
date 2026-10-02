@@ -1,0 +1,54 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.13.0/schema.json",
+  "name": "293d24a31c97dd6eeed2",
+  "position": {
+    "x": 49.399822442586981,
+    "y": 671.01425484513982,
+    "z": 37000,
+    "height": 35.677649541868377,
+    "width": 285.421196334947,
+    "tabOrder": 37000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Created by Lucky Ponkiya",
+                    "textStyle": {
+                      "fontFamily": "Arial Unicode MS",
+                      "fontStyle": "italic",
+                      "fontSize": "14pt",
+                      "color": "#f3c99b"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "visualContainerObjects": {
+      "background": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

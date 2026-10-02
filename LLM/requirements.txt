@@ -1,0 +1,7 @@
+langgraph
+langchain
+langchain-huggingface
+pandas
+numpy
+openpyxl
+dotenv

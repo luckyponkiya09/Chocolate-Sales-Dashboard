@@ -1,0 +1,103 @@
+table Chocolate_Full
+	lineageTag: 6b179f8e-426c-4d01-b818-82f6fda7fd5c
+
+	column '  Order_ID  '
+		dataType: int64
+		formatString: 0
+		lineageTag: 65034a5e-74ce-4898-a367-0855d00d9bbc
+		summarizeBy: none
+		sourceColumn: "  Order_ID  "
+
+		annotation SummarizationSetBy = Automatic
+
+	column '  Sales Person  '
+		dataType: string
+		lineageTag: 2b9c8c8e-fc5c-4806-81df-09ef6d7e94ed
+		summarizeBy: none
+		sourceColumn: "  Sales Person  "
+
+		annotation SummarizationSetBy = Automatic
+
+	column '  Country  '
+		dataType: string
+		lineageTag: 0e6629d6-6c71-47c8-a1a9-a5dd2e1b80d5
+		summarizeBy: none
+		sourceColumn: "  Country  "
+
+		annotation SummarizationSetBy = Automatic
+
+	column '  Product  '
+		dataType: string
+		lineageTag: 6a8230c3-e9ff-4998-9069-0c0b0d3e3ad1
+		summarizeBy: none
+		sourceColumn: "  Product  "
+
+		annotation SummarizationSetBy = Automatic
+
+	column '  Date  '
+		dataType: string
+		lineageTag: 11e9c008-e1c2-430d-8eea-20a843d8f454
+		summarizeBy: none
+		sourceColumn: "  Date  "
+
+		annotation SummarizationSetBy = Automatic
+
+	column '  Amount  '
+		dataType: int64
+		formatString: 0
+		lineageTag: 5c1d0665-329b-41cc-82c5-7d50dc869ce8
+		summarizeBy: sum
+		sourceColumn: "  Amount  "
+
+		annotation SummarizationSetBy = Automatic
+
+	column '  Boxes Shipped  '
+		dataType: int64
+		formatString: 0
+		lineageTag: 87bdfe60-2412-419e-8e9b-fe199ab9b200
+		summarizeBy: sum
+		sourceColumn: "  Boxes Shipped  "
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Dilevery Cost'
+		dataType: int64
+		formatString: 0
+		lineageTag: d9f0a0f3-d73b-4c8c-b2d2-b9892dce8683
+		summarizeBy: sum
+		sourceColumn: Dilevery Cost
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Quantity  Sold'
+		dataType: int64
+		formatString: 0
+		lineageTag: aa58ea3f-d6af-4487-a30f-967780bada8e
+		summarizeBy: sum
+		sourceColumn: Quantity  Sold
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total Sales'
+		dataType: int64
+		formatString: 0
+		lineageTag: cf62efe8-8649-463b-96ff-477f6e234745
+		summarizeBy: sum
+		sourceColumn: Total Sales
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Chocolate_Full = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\ponki.LUCKY\OneDrive\Desktop\Internship\Chocolate Full Data\Chocolate Full Data\Chocolate main Data.xlsx"), null, true),
+				    Table1_Table = Source{[Item="Table1",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(Table1_Table,{{"  Order_ID  ", Int64.Type}, {"  Sales Person  ", type text}, {"  Country  ", type text}, {"  Product  ", type text}, {"  Date  ", type text}, {"  Amount  ", Int64.Type}, {"  Boxes Shipped  ", Int64.Type}, {"Dilevery Cost", Int64.Type}, {"Quantity  Sold", Int64.Type}, {"Total Sales", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

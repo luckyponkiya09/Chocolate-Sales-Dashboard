@@ -1,0 +1,211 @@
+table Chocolate_Sales
+	lineageTag: a53678a7-b623-468a-8a11-a36643471a67
+
+	measure 'Cost Total Sales' = SUM('Chocolate_Full'[Quantity  Sold])
+		formatString: 0
+		lineageTag: 4cb75d6e-6724-436d-84f4-6317587ba148
+
+	measure 'Revenue Per Box' = DIVIDE(SUM('Chocolate_Full'[Total Sales]), SUM('Chocolate_Full'[  Boxes Shipped  ]))
+		formatString: 0
+		lineageTag: 44264dc2-7665-4e1f-afa8-7d6fb31aad60
+
+	measure 'Total Orders' = DISTINCTCOUNT(Chocolate_Full[  Order_ID  ])
+		formatString: 0
+		lineageTag: 0ca0b0ba-4b0b-4960-9bc1-5fda17a4b1de
+
+	measure 'Total Revenue' = SUM(Chocolate_Full[Total Sales])
+		formatString: "₹"\ #,0.###############;#,0.###############\ -"₹";"₹"\ #,0.###############
+		lineageTag: ab4aa986-00c3-4dd7-b5f7-809d80fb5639
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-IN"}
+
+	measure 'Avg Order Value' = [Total Revenue]/[Total Orders]
+		formatString: "₹"\ #,0.###############;#,0.###############\ -"₹";"₹"\ #,0.###############
+		lineageTag: 3c5ca784-132d-477c-9cba-14fa82a9d5fa
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-IN"}
+
+	measure 'Total Qnty' = SUM(Chocolate_Full[Quantity  Sold])
+		formatString: 0
+		lineageTag: 766475cd-c23d-464f-9c65-0d17c4d07794
+
+	measure 'Total Delivery Cost' = SUM(Chocolate_Full[Dilevery Cost])
+		formatString: "₹"\ #,0.###############;#,0.###############\ -"₹";"₹"\ #,0.###############
+		lineageTag: 841ff5fa-cc61-43de-b339-0f4a0fc49369
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-IN"}
+
+	measure 'Delivery Cost Per Order' = [Total Delivery Cost]/[Total Orders]
+		formatString: "₹"\ #,0.###############;#,0.###############\ -"₹";"₹"\ #,0.###############
+		lineageTag: 38278c2b-d636-4488-b690-761bd63bb308
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-IN"}
+
+	measure 'Total Boxes Shipped' = SUM(Chocolate_Full[  Boxes Shipped  ])
+		formatString: 0
+		lineageTag: ce2042d2-3e4b-4685-b666-1d7fd3021f1d
+
+	column '  Order_ID  '
+		dataType: int64
+		formatString: 0
+		lineageTag: 467b04fd-0ab4-47d6-9b05-fa6d65c08c83
+		summarizeBy: none
+		sourceColumn: "  Order_ID  "
+
+		annotation SummarizationSetBy = Automatic
+
+	column '  Sales Person  '
+		dataType: string
+		lineageTag: 0d74f347-e86f-41c8-8aa3-b3d542d5cfb7
+		summarizeBy: none
+		sourceColumn: "  Sales Person  "
+
+		annotation SummarizationSetBy = Automatic
+
+	column '  Country  '
+		dataType: string
+		lineageTag: cdfd210c-7c42-43a5-a791-189e42ea6914
+		summarizeBy: none
+		sourceColumn: "  Country  "
+
+		annotation SummarizationSetBy = Automatic
+
+	column '  Product  '
+		dataType: string
+		lineageTag: 751d3016-a628-4386-a47a-8127d86ee3c8
+		summarizeBy: none
+		sourceColumn: "  Product  "
+
+		annotation SummarizationSetBy = Automatic
+
+	column '  Date  '
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 6e86fdbd-0570-44cf-8ae0-1f548319823f
+		summarizeBy: none
+		sourceColumn: "  Date  "
+
+		variation Variation
+			isDefault
+			relationship: 1cc2b24f-a521-4484-a53e-19f36ce20b73
+			defaultHierarchy: LocalDateTable_5c4497cc-41d6-4a76-a60d-ae73e494d171.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column '  Amount  '
+		dataType: decimal
+		formatString: "₹"\ #,0.###############;#,0.###############\ -"₹";"₹"\ #,0.###############
+		lineageTag: 71da8054-7d1a-446b-b37a-ccfe43b16064
+		summarizeBy: sum
+		sourceColumn: "  Amount  "
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-IN"}
+
+	column '  Boxes Shipped  '
+		dataType: int64
+		formatString: 0
+		lineageTag: e3782110-a1bc-4775-bda7-baded9fe9c90
+		summarizeBy: sum
+		sourceColumn: "  Boxes Shipped  "
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Shipment Size'
+		dataType: string
+		lineageTag: b2532c5b-a169-4395-a72b-25ebf3c908fe
+		summarizeBy: none
+		sourceColumn: Shipment Size
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Delivery Cost'
+		dataType: decimal
+		formatString: "₹"\ #,0.###############;#,0.###############\ -"₹";"₹"\ #,0.###############
+		lineageTag: e3a7b09a-206e-411f-aae4-0337cf73bfc7
+		summarizeBy: sum
+		sourceColumn: Delivery Cost
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-IN"}
+
+	column 'Quantity Sold'
+		dataType: int64
+		formatString: 0
+		lineageTag: b07137d4-a7e2-4f5d-be8b-08cd337090d1
+		summarizeBy: sum
+		sourceColumn: Quantity Sold
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Total Sales'
+		dataType: decimal
+		formatString: "₹"\ #,0.###############;#,0.###############\ -"₹";"₹"\ #,0.###############
+		lineageTag: 9e7d6610-446b-4d5d-9d49-2c08ca733a52
+		summarizeBy: sum
+		sourceColumn: Total Sales
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-IN"}
+
+	column Quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: b7b276d9-7c94-45ba-a13f-eb8cc274e9ab
+		summarizeBy: sum
+		sourceColumn: Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Name'
+		dataType: string
+		lineageTag: 61428299-ff75-42e9-a65b-6443fcd8ffd5
+		summarizeBy: none
+		sourceColumn: Month Name
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Chocolate_Sales = m
+		mode: import
+		source =
+				let
+				    Source = Excel.Workbook(File.Contents("C:\Users\ponki.LUCKY\Downloads\Chocolate Sales.xlsx"), null, true),
+				    Sheet1_Sheet = Source{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    #"Promoted Headers" = Table.PromoteHeaders(Sheet1_Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"  Column 1  ", type any}, {"  Column 2  ", type text}, {"  Column 3  ", type text}, {"  Column 3  _1", type text}, {"  Column 4  ", type text}, {"  Column 5  ", type any}, {"  Column 6  ", type any}, {"  Column 7  ", type any}}),
+				    #"Promoted Headers1" = Table.PromoteHeaders(#"Changed Type", [PromoteAllScalars=true]),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Promoted Headers1",{{"  Order_ID  ", Int64.Type}, {"  Sales Person  ", type text}, {"  Country  ", type text}, {"  Country  _1", type text}, {"  Product  ", type text}, {"  Date  ", Int64.Type}, {"  Amount  ", Int64.Type}, {"  Boxes Shipped  ", Int64.Type}}),
+				    #"Changed Type2" = Table.TransformColumnTypes(#"Changed Type1",{{"  Date  ", type date}, {"  Amount  ", Currency.Type}, {"  Boxes Shipped  ", Int64.Type}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type2",{"  Country  _1"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Columns", {"  Order_ID  "}),
+				    #"Trimmed Text" = Table.TransformColumns(#"Removed Duplicates",{{"  Country  ", Text.Trim, type text}}),
+				    #"Replaced Value" = Table.ReplaceValue(#"Trimmed Text","UK","United Kingdom",Replacer.ReplaceText,{"  Country  "}),
+				    #"Replaced Value1" = Table.ReplaceValue(#"Replaced Value","USA","United States",Replacer.ReplaceText,{"  Country  "}),
+				    #"Replaced Value2" = Table.ReplaceValue(#"Replaced Value1","US","United States",Replacer.ReplaceText,{"  Country  "}),
+				    #"Replaced Value3" = Table.ReplaceValue(#"Replaced Value2","NZ","New Zealand",Replacer.ReplaceText,{"  Country  "}),
+				    #"Replaced Value4" = Table.ReplaceValue(#"Replaced Value3","London","United Kingdom",Replacer.ReplaceText,{"  Country  "}),
+				    #"Trimmed Text1" = Table.TransformColumns(#"Replaced Value4",{{"  Sales Person  ", Text.Trim, type text}, {"  Product  ", Text.Trim, type text}}),
+				    #"Uppercased Text" = Table.TransformColumns(#"Trimmed Text1",{{"  Sales Person  ", Text.Upper, type text}, {"  Country  ", Text.Upper, type text}, {"  Product  ", Text.Upper, type text}}),
+				    #"Added Conditional Column" = Table.AddColumn(#"Uppercased Text", "Shipment Size", each if [#"  Boxes Shipped  "] <= 50 then "Small Cargo" else if [#"  Boxes Shipped  "] <= 100 then "Medium Cargo" else "Big Cargo"),
+				    #"Added Custom" = Table.AddColumn(#"Added Conditional Column", "Delivery Cost", each [#"  Boxes Shipped  "]*3),
+				    #"Changed Type3" = Table.TransformColumnTypes(#"Added Custom",{{"Delivery Cost", Currency.Type}}),
+				    #"Added Custom1" = Table.AddColumn(#"Changed Type3", "Total Quantity Sold", each [#"  Boxes Shipped  "]*10),
+				    #"Added Custom2" = Table.AddColumn(#"Added Custom1", "Total Sales", each [#"  Amount  "]*[Total Quantity Sold]),
+				    #"Inserted Quarter" = Table.AddColumn(#"Added Custom2", "Quarter", each Date.QuarterOfYear([#"  Date  "]), Int64.Type),
+				    #"Inserted Month Name" = Table.AddColumn(#"Inserted Quarter", "Month Name", each Date.MonthName([#"  Date  "]), type text),
+				    #"Changed Type4" = Table.TransformColumnTypes(#"Inserted Month Name",{{"Total Sales", Currency.Type}}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Changed Type4",{{"Total Quantity Sold", "Quantity Sold"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
